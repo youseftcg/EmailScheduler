@@ -1,7 +1,7 @@
 const pino = require("pino")()
 
 function info(message) {
-    pino.info("TAG", message)
+    pino.info(message)
 }
 
 function error(message) {
