@@ -2,7 +2,7 @@
 
 A project for scheduling sending emails to subscribed users every 60 seconds.
 
-## How to set up:
+## Set up:
 
 1. You need to get an API_KEY from [SendGrid](https://signup.sendgrid.com/) for Email Api. (SendGrid is the library used to send emails to users)
 2. Configure SendGrid to verify the email you will be sending emails from. You can follow this [guide](https://docs.sendgrid.com/ui/sending-email/sender-verification)
@@ -14,7 +14,7 @@ A project for scheduling sending emails to subscribed users every 60 seconds.
 
 ## Usage
 
-After you have completed the [set up](#how-to-set-up), you can start the app using `npm start`.
+After you have completed the [set up](#set-up), you can start the app using `npm start`.
 
 To add an email address to the list of subscribers you can do so using one of the following ways:
 
