@@ -46,6 +46,8 @@ class EmailSchedulerService {
 
         logger.info("================= SENDING EMAILS TO USERS =================")
         for (const user of users) {
+            // Send to each email only 3 times
+            if(user.sentMessagesIDsSet.size > 2) return;
             // Check that user didn't receive all these messages already
             if (!this.didUserGetAllMessages(user, messages)) {
                 const message = this.getUniqueMessageForUserFromMessagesMap(user, messages);
