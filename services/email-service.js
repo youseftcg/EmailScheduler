@@ -7,7 +7,7 @@ class EmailService{
     /**
      * Constructor
      *
-     * @param sender email to be used when sending emails to users
+     * @param sender, email to be used when sending emails to users
      */
     constructor(sender) {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);

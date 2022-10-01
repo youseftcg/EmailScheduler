@@ -10,6 +10,7 @@ const Message = require("./models/message")
 const EmailSchedulerService = require("./services/email-scheduler-service");
 const messagesRepository = require("./repositories/messages-repository");
 const usersRepository = require("./repositories/users-repository");
+const EMAIL_ADDRESS = "example@example.com"
 
 startEmailScheduler();
 startWebService();
@@ -20,7 +21,7 @@ function startEmailScheduler() {
         messagesRepository.addMessage(new Message(...Object.values(message)))
     }
 
-    const emailService = new EmailService("yousefjoe@appgmail.com");
+    const emailService = new EmailService(EMAIL_ADDRESS);
     // Start sending emails to users every 60 second
     new EmailSchedulerService(emailService, 60, usersRepository, messagesRepository).start();
 }
