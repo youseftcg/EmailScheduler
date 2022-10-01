@@ -10,7 +10,7 @@ const Message = require("./models/message")
 const EmailSchedulerService = require("./services/email-scheduler-service");
 const messagesRepository = require("./repositories/messages-repository");
 const usersRepository = require("./repositories/users-repository");
-const EMAIL_ADDRESS = "yousefjoeapp@gmail.com"
+const EMAIL_ADDRESS = "example@example.com"
 
 startEmailScheduler();
 startWebService();
