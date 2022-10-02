@@ -1,21 +1,32 @@
 const sgMail = require('@sendgrid/mail')
 const emailValidator = require("../utils/email-validator")
 const logger = require("../utils/logger")
+const InvalidArgumentError = require("../errors/invalid-arguments-error")
 
+/**
+ * This the service responsible for sending emails to users.
+ */
+class EmailService {
 
-class EmailService{
     /**
      * Constructor
      *
-     * @param sender, email to be used when sending emails to users
+     * @param senderEmail, email to be used when sending emails to users
      */
-    constructor(sender) {
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-        if(emailValidator.validate(sender)){
-            this.sender = sender;
+    constructor(senderEmail) {
+        this.config();
+        if (emailValidator.validate(senderEmail)) {
+            this.senderEmail = senderEmail;
         } else {
-            throw new Error("Invalid Argument: Email is invalid!")
+            throw new InvalidArgumentError("Email is invalid!");
         }
+    }
+
+    /**
+     * Configures the email service.
+     */
+    config() {
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     }
 
     /**
@@ -26,8 +37,8 @@ class EmailService{
      * @param body, content of the email
      * @return {Boolean} whether the email was sent or not
      */
-    async sendEmail(to, subject, body){
-        const email = {from: this.sender, to: to, subject: subject, text: body}
+    async sendEmail(to, subject, body) {
+        const email = {from: this.senderEmail, to: to, subject: subject, text: body}
         try {
             await sgMail.send(email)
             logger.trace("EmailService: Email sent")

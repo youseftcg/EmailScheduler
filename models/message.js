@@ -2,7 +2,7 @@ class Message{
 
     constructor(id, title, body) {
         this.id = id;
-        this.title = title;
+        this.title = title; // to be used in the email subject
         this.body = body;
     }
 

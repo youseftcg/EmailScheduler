@@ -1,6 +1,10 @@
 const Random = require("../utils/random");
 const logger = require("../utils/logger")
+const EMAIL_SUBJECT = "Your daily email: ";
 
+/**
+ * This service is responsible for scheduling sending emails to users every given time. (e.g. sending emails every one minute)
+ */
 class EmailSchedulerService {
     /**
      * Constructor
@@ -49,7 +53,7 @@ class EmailSchedulerService {
             // Check that user didn't receive all these messages already
             if (!this.didUserGetAllMessages(user, messages)) {
                 const message = this.getUniqueMessageForUserFromMessagesMap(user, messages);
-                const isSent = await this.emailService.sendEmail(user.email, message.title, message.body);
+                const isSent = await this.emailService.sendEmail(user.email,  EMAIL_SUBJECT + message.title, message.body);
                 if(isSent){
                     // Add this message to the list of sent messages to user
                     user.addSentMessageId(message.id);
@@ -65,6 +69,16 @@ class EmailSchedulerService {
 
     /**
      * Helper method to check if a user received all messages or not.
+     *
+     * NOTE:
+     *  The current way of checking the size of the messages against the size of the messages received by the user
+     *  is probably not the best way to check if a user got all messages, since we could remove/replace messages.
+     *  So this would work well assuming that we never remove or replace messages.
+     *
+     *  A better way that could be explored (without having to loop over all messages and user received messages)
+     *  is trying to hash the messages IDs or try to produce a single value from all the messages to be able to check
+     *  this value/hash of the user against the messages hash/value.
+     *
      * @returns {boolean}
      */
     didUserGetAllMessages(user, messages) {

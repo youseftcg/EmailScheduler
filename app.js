@@ -10,7 +10,10 @@ const Message = require("./models/message")
 const EmailSchedulerService = require("./services/email-scheduler-service");
 const messagesRepository = require("./repositories/messages-repository");
 const usersRepository = require("./repositories/users-repository");
-const EMAIL_ADDRESS = "example@example.com"
+const logger = require("./utils/logger");
+
+const EMAIL_ADDRESS = "example@example.com"; // Replace your email here
+
 
 startEmailScheduler();
 startWebService();
@@ -29,7 +32,7 @@ function startEmailScheduler() {
 
 function startWebService() {
     app.listen(port, () => {
-        console.log(`Listening on port ${port}...`)
+        logger.info(`Listening on port ${port}...`)
     })
 
     // Accept url-encoded format in requests
