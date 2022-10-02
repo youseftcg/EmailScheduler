@@ -23,7 +23,7 @@ function getAllUsersAsArray() {
  */
 function addUser(user) {
     // Only add the user if not added before
-    if (!users.has(user.id)){
+    if (!users.has(user.email)){
         users.set(user.email, user);
     }
 }
