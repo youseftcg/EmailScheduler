@@ -22,7 +22,10 @@ function getAllUsersAsArray() {
  * @param user
  */
 function addUser(user) {
-    users.set(user.email, user);
+    // Only add the user if not added before
+    if (!users.has(user.id)){
+        users.set(user.email, user);
+    }
 }
 
 module.exports.getAllUsersAsMap = getAllUsersAsMap;
